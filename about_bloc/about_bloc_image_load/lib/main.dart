@@ -1,4 +1,4 @@
-import 'package:about_mltiple_provider/views/home_page.dart';
+import 'package:about_bloc_image_load/views/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
