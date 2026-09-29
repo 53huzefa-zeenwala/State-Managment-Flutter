@@ -83,6 +83,42 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+class SecondPage extends StatefulWidget {
+  const SecondPage({super.key});
+
+  @override
+  State<SecondPage> createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
+  ValueKey _textKey = const ValueKey<String?>(null);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(ApiProvider.of(context).api.dateAndTime ?? ''),
+      ),
+      body: Material(
+        color: Colors.orange.shade500,
+        child: InkWell(
+          onTap: () async {
+            final api = ApiProvider.of(context).api;
+            final dateAndTime = await api.getDateAndTime();
+            setState(() {
+              _textKey = ValueKey(dateAndTime);
+            });
+          },
+          child: SizedBox.expand(
+            child: Container(
+              child: DateTimeWidget(key: _textKey),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class DateTimeWidget extends StatelessWidget {
   const DateTimeWidget({super.key});
 
